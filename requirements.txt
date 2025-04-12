@@ -1,0 +1,13 @@
+apache-airflow
+yfinance
+pandas
+numpy
+matplotlib   
+plotly
+streamlit
+scikit-learn
+sqlalchemy
+flask
+gunicorn
+psycopg2-binary
+pyyaml
