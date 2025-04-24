@@ -13,44 +13,73 @@ services:
       retries: 5
     restart: always
 
-  airflow-webserver:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.airflow   # <- correcto
-    restart: always
+  airflow-init:
+    image: apache/airflow:2.7.3
     depends_on:
       postgres:
         condition: service_healthy
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      # - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      # Nota: Agregamos la configuración de DB para resolver la advertencia
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+    entrypoint: ["bash", "-c"]
+    command: >
+      "airflow db migrate &&
+      airflow users create \
+      --username admin \
+      --firstname admin \
+      --lastname admin \
+      --role Admin \
+      --email admin@example.org\
+      --password admin"
+    restart: on-failure
+
+
+  airflow-webserver:
+    image: apache/airflow:2.7.3
+ # Usar imagen en lugar de build
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile.airflow   # <- correcto
+    restart: always
+    
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
       - DATA_PATH=/opt/airflow/data
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./data:/opt/airflow/data
-    ports:
-      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
     command: webserver
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 10s
       timeout: 10s
       retries: 5
+      start_period: 30s  # Damos más tiempo para que inicie
 
   airflow-scheduler:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.airflow   # <- correcto
+    image: apache/airflow:2.7.3
+  # Usar imagen en lugar de build
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile.airflow   # <- correcto
     restart: always
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
@@ -59,11 +88,18 @@ services:
       - ./dags:/opt/airflow/dags
       - ./data:/opt/airflow/data
     command: scheduler
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
 
   streamlit:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.streamlit   # <- correcto
+    image: python:3.9-slim  # Usar imagen en lugar de build
+
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/Dockerfile.streamlit   # <- correcto
     restart: always
     depends_on:
       airflow-webserver:
@@ -76,6 +112,12 @@ services:
     ports:
       - "8501:8501"
     command: streamlit run /app/streamlit/app.py
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
 
 volumes:
   postgres-db-volume:

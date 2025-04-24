@@ -1,28 +1,6 @@
-# Usa una imagen base de Python
-FROM python:3.9-slim
+# Usar la imagen oficial de Airflow que ya tiene todo preinstalado
+FROM apache/airflow:2.7.3-python3.9
 
-# Instala las dependencias del sistema necesarias para compilar pyarrow y otras bibliotecas
-RUN apt-get update && apt-get install -y \
-    cmake \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# Establece el directorio de trabajo
-WORKDIR /app
-
-# Copia el archivo de requisitos al contenedor
-COPY requirements.txt .
-
-# Instala las dependencias de Python, incluyendo psutil
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt && \
-    pip install psutil
-
-# Elimina el cache de pip para reducir el tamaño de la imagen
-RUN rm -rf /root/.cache
-
-# Expon el puerto si es necesario (por ejemplo, para aplicaciones web)
-# EXPOSE 8000
-
-# Comando por defecto al ejecutar el contenedor (ajústalo según tu aplicación)
-CMD ["python", "app.py"]
+# Solo necesitas instalar tus dependencias específicas
+COPY requirements-airflow.txt .
+RUN pip install --no-cache-dir -r requirements-airflow.txt
