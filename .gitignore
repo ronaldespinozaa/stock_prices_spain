@@ -10,3 +10,4 @@ wheels/
 .venv
 .gitignore
 .python-version
+logs/scheduler/latest
