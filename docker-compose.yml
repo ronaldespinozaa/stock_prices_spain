@@ -59,6 +59,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
+      - _PIP_ADDITIONAL_REQUIREMENTS=yfinance
       - DATA_PATH=/opt/airflow/data
     volumes:
       - ./dags:/opt/airflow/dags
@@ -67,11 +68,11 @@ services:
       - "8080:8080"
     command: webserver
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 30s  # Damos más tiempo para que inicie el servidor web
+    test: ["CMD", "airflow", "jobs", "check", "--job-type", "SchedulerJob", "--hostname", "$(hostname)"]
+    interval: 10s
+    timeout: 10s
+    retries: 5
+    start_period: 30s
       
   airflow-scheduler:
     image: apache/airflow:2.7.3
@@ -105,8 +106,7 @@ services:
       dockerfile: ./docker/Dockerfile.streamlit   # <- correcto
     restart: always
     depends_on:
-      airflow-webserver:
-        condition: service_healthy
+      - airflow-scheduler  # En lugar de airflow-webserver con condition: service_healthy
     environment:
       - DATA_PATH=/app/data
     volumes:
