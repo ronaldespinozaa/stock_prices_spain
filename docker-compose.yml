@@ -58,7 +58,6 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
-      - _PIP_ADDITIONAL_REQUIREMENTS=yfinance pandas_ta
       - DATA_PATH=/opt/airflow/data
     volumes:
       - ./dags:/opt/airflow/dags
