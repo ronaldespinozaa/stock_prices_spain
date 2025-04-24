@@ -42,7 +42,10 @@ services:
 
 
   airflow-webserver:
-    image: apache/airflow:2.7.3
+    # image: apache/airflow:2.7.3
+    build:
+      context: .  # Esto debería ser la raíz donde está requirements.txt
+      dockerfile: ./docker/Dockerfile.airflow
     restart: always
     depends_on:
       postgres:
@@ -95,11 +98,11 @@ services:
         condition: service_completed_successfully
 
   streamlit:
-    image: python:3.9-slim  # Usar imagen en lugar de build
+    # image: python:3.9-slim  # Usar imagen en lugar de build
 
-    # build:
-    #   context: .
-    #   dockerfile: ./docker/Dockerfile.streamlit   # <- correcto
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.streamlit   # <- correcto
     restart: always
     depends_on:
       airflow-webserver:

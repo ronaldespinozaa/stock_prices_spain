@@ -1,15 +1,24 @@
-# Opción 1: Imagen oficial de Streamlit
-FROM streamlit/streamlit:1.30.0-python3.9
-# Esta imagen ya tiene Streamlit y muchas dependencias comunes preinstaladas
-
-# Opción 2: Imagen de Python en Debian con dependencias preinstaladas
+# Usar imagen de Python en Debian con dependencias preinstaladas
 FROM python:3.9-slim-bullseye
 
-# Instalar solo lo esencial
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     wget \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Usar pip para instalar versiones precompiladas (wheels)
+# Copiar el archivo de requirements
+COPY requirements.txt .
+
+# Instalar dependencias de Python desde requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir streamlit pyarrow pandas matplotlib
+    pip install --no-cache-dir -r requirements.txt
+
+# Exponer el puerto donde Streamlit estará disponible
+EXPOSE 8501
+
+# Comando predeterminado
+CMD ["streamlit", "run", "/app/streamlit/app.py"]

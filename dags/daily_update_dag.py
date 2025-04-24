@@ -8,7 +8,7 @@ from airflow.sensors.time_delta import TimeDeltaSensor
 
 # Importar utilidades personalizadas
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(file)))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from utils.stock_utils import download_stock_data, process_stock_data
 from utils.db_utils import create_db_connection, create_tables, insert_stock_data
 

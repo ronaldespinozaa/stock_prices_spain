@@ -1,6 +1,5 @@
-# Usar la imagen oficial de Airflow que ya tiene todo preinstalado
-FROM apache/airflow:2.7.3-python3.9
+FROM apache/airflow:2.7.3
 
-# Solo necesitas instalar tus dependencias específicas
-COPY requirements-airflow.txt .
-RUN pip install --no-cache-dir -r requirements-airflow.txt
+# Instalar dependencias adicionales
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt

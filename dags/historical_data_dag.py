@@ -9,7 +9,7 @@ from airflow.utils.dates import days_ago
 
 # Lista de las 10 principales acciones del IBEX 35
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(file)))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from utils.stock_utils import download_stock_data, process_stock_data
 from utils.db_utils import create_db_connection, create_tables, insert_stock_data
 
