@@ -54,12 +54,11 @@ services:
         condition: service_completed_successfully
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
-      - _PIP_ADDITIONAL_REQUIREMENTS=yfinance
+      - _PIP_ADDITIONAL_REQUIREMENTS=yfinance pandas_ta
       - DATA_PATH=/opt/airflow/data
     volumes:
       - ./dags:/opt/airflow/dags
@@ -68,18 +67,17 @@ services:
       - "8080:8080"
     command: webserver
     healthcheck:
-    test: ["CMD", "airflow", "jobs", "check", "--job-type", "SchedulerJob", "--hostname", "$(hostname)"]
-    interval: 10s
-    timeout: 10s
-    retries: 5
-    start_period: 30s
+      test: ["CMD", "airflow", "jobs", "check", "--job-type", "WebserverJob", "--hostname", "$(hostname)"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
       
   airflow-scheduler:
-    image: apache/airflow:2.7.3
-  # Usar imagen en lugar de build
-    # build:
-    #   context: .
-    #   dockerfile: ./docker/Dockerfile.airflow   # <- correcto
+    #image: apache/airflow:2.7.3
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.airflow   # <- correcto
     restart: always
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -87,6 +85,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
+      - _PIP_ADDITIONAL_REQUIREMENTS=yfinance pandas_ta
       - DATA_PATH=/opt/airflow/data
     volumes:
       - ./dags:/opt/airflow/dags
@@ -115,12 +114,12 @@ services:
     ports:
       - "8501:8501"
     command: streamlit run /app/streamlit/app.py
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
+    # healthcheck:
+    #   test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 3
+    #   start_period: 20s
 
 volumes:
   postgres-db-volume:
