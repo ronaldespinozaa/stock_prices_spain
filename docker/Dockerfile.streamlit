@@ -15,7 +15,15 @@ COPY requirements.txt .
 
 # Instalar dependencias de Python desde requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt 
+
+# Copiar directorios necesarios
+COPY streamlit/ /app/streamlit/
+COPY dags/ /app/dags/
+COPY config/ /app/config/
+
+# Configurar PYTHONPATH para incluir el directorio raíz
+ENV PYTHONPATH="/app:${PYTHONPATH}"
 
 # Exponer el puerto donde Streamlit estará disponible
 EXPOSE 8501

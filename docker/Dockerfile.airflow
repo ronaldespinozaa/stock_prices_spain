@@ -5,7 +5,10 @@ COPY requirements.txt /tmp/requirements.txt
 
 # Instalar dependencias como usuario airflow
 USER airflow
-RUN pip install --no-cache-dir --user -r /tmp/requirements.txt
+RUN pip install --no-cache-dir --user -r /tmp/requirements.txt 
+# RUN pip install --no-cache-dir flask==2.0.0
 
-# Volver a la configuración por defecto
-USER root
+
+
+# Importante: mantener USER airflow al final
+# NO volver a USER root

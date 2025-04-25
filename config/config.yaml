@@ -1,0 +1,39 @@
+# Configuración general
+general:
+  data_path: /app/data
+
+# Configuración de la base de datos
+database:
+  path: /app/data/database/stocks.db
+  type: sqlite
+
+# Configuración de las acciones
+stocks:
+  tickers:
+    - SAN.MC  # Banco Santander
+    - BBVA.MC  # BBVA
+    - IBE.MC  # Iberdrola
+    - ITX.MC  # Inditex
+    - TEF.MC  # Telefónica
+    - REP.MC  # Repsol
+    - CABK.MC  # CaixaBank
+    - NTGY.MC  # Naturgy
+    - FER.MC  # Ferrovial
+    - AMS.MC  # Amadeus
+  update_interval: daily
+
+# Configuración de la visualización
+visualization:
+  default_period: 1y
+  chart_theme: streamlit
+  colors:
+    up: green
+    down: red
+    neutral: gray
+
+# Configuración de Streamlit
+streamlit:
+  title: "Análisis de Acciones IBEX 35"
+  page_icon: "📈"
+  layout: "wide"
+

@@ -1,4 +1,19 @@
-yfinance==0.2.36
-pandas_ta==0.3.14b0
+# Dependencias principales
+yfinance==0.2.52
+pandas==1.5.3       # Cambiado de 2.0.3 para compatibilidad con Airflow
+numpy==1.24.3
 matplotlib==3.7.1
+
+# Dependencias de visualización
 streamlit==1.24.0
+plotly==5.14.1
+pandas_ta==0.3.14b0
+
+# Utilidades
+pyyaml==6.0
+
+# Dependencias críticas para Airflow
+flask==2.2.5         # Cambiado de 2.3.3 a la versión compatible con Airflow 2.7.3
+sqlalchemy==1.4.50   # Añadido para compatibilidad con Airflow
+werkzeug==2.2.3      # Añadido para compatibilidad con Flask 2.2.x
+importlib-metadata<5 # Añadido para evitar conflictos

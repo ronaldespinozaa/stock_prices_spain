@@ -21,16 +21,17 @@ services:
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       # - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
-      - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW_FERNET_KEY}
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY}
       # Nota: Agregamos la configuración de DB para resolver la advertencia
     volumes:
       - ./dags:/opt/airflow/dags
       - ./data:/opt/airflow/data
     entrypoint: ["bash", "-c"]
     command: >
-      "airflow db migrate &&
+      "airflow db init &&
       airflow users create \
       --username admin \
       --firstname admin \
@@ -42,7 +43,6 @@ services:
 
 
   airflow-webserver:
-    # image: apache/airflow:2.7.3
     build:
       context: .  # Esto debería ser la raíz donde está requirements.txt
       dockerfile: ./docker/Dockerfile.airflow
@@ -55,8 +55,9 @@ services:
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
-      - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW_FERNET_KEY}
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY}
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
       - DATA_PATH=/opt/airflow/data
     volumes:
@@ -66,39 +67,44 @@ services:
       - "8080:8080"
     command: webserver
     healthcheck:
-      test: ["CMD", "airflow", "jobs", "check", "--job-type", "WebserverJob", "--hostname", "$(hostname)"]
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 10s
       timeout: 10s
       retries: 5
       start_period: 30s
       
   airflow-scheduler:
-    #image: apache/airflow:2.7.3
     build:
       context: .
-      dockerfile: ./docker/Dockerfile.airflow   # <- correcto
+      dockerfile: ./docker/Dockerfile.airflow
     restart: always
-    environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
-      - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False
-      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
-      - _PIP_ADDITIONAL_REQUIREMENTS=yfinance pandas_ta
-      - DATA_PATH=/opt/airflow/data
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./data:/opt/airflow/data
-    command: scheduler
     depends_on:
       postgres:
         condition: service_healthy
       airflow-init:
         condition: service_completed_successfully
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW_FERNET_KEY}
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY}
+      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
+      - DATA_PATH=/opt/airflow/data
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+    command: scheduler
+    # Añadir healthcheck para el scheduler
+    healthcheck:
+      test: ["CMD-SHELL", "airflow jobs check --job-type SchedulerJob --hostname $(hostname)"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
   streamlit:
     # image: python:3.9-slim  # Usar imagen en lugar de build
-
     build:
       context: .
       dockerfile: ./docker/Dockerfile.streamlit   # <- correcto
@@ -108,8 +114,10 @@ services:
     environment:
       - DATA_PATH=/app/data
     volumes:
-      - ./data:/app/data
       - ./streamlit:/app/streamlit
+      - ./dags:/app/dags
+      - ./config:/app/config
+      - ./data:/app/data
     ports:
       - "8501:8501"
     command: streamlit run /app/streamlit/app.py

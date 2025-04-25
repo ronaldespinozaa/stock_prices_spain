@@ -2,40 +2,49 @@ import pandas as pd
 import numpy as np
 import yfinance as yf
 from datetime import datetime, timedelta
+import logging
+import os
 
-def download_stock_data(ticker, start_date, end_date):
+import yfinance as yf
+import pandas as pd
+import logging
+
+def download_stock_data(ticker, period):
     """
-    Descarga datos históricos de una acción desde yfinance.
+    Descarga datos históricos desde yfinance usando el parámetro 'period'.
 
     Args:
         ticker (str): Símbolo de la acción (ej. 'SAN.MC')
-        start_date (datetime): Fecha de inicio
-        end_date (datetime): Fecha de fin
-        
+        period (str): Periodo de descarga (ej. '3y', 'max').
+                      Valores válidos: '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'
+
     Returns:
-        pandas.DataFrame: DataFrame con los datos históricos
-"""
+        pandas.DataFrame: DataFrame con los datos históricos, o un DataFrame vacío en caso de error.
+    """
+    valid_periods = ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
+    if period not in valid_periods:
+        logging.error(f"El periodo '{period}' no es válido para {ticker}.")
+        return pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
+
     try:
-    # Añadir un día al end_date para asegurar que incluye el último día
-        end_date_adjusted = end_date + timedelta(days=1)
-        
-        # Descargar datos
         df = yf.download(
             ticker,
-            start=start_date.strftime('%Y-%m-%d'),
-            end=end_date_adjusted.strftime('%Y-%m-%d'),
-            progress=False
+            period=period,
+            progress=False,
+            threads=True,
+            auto_adjust=True,
+            timeout=30
         )
-        
-        # Si el DataFrame está vacío, devolver un DataFrame vacío con las columnas correctas
-        if df.empty:
-            return pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
-            
-        return df
+
+        if not df.empty:
+            logging.info(f"Datos descargados correctamente para {ticker} con periodo '{period}'.Se han descargado {len(df)} filas.")
+        else:
+            logging.warning(f"No se encontraron datos para {ticker} con periodo '{period}'.")
+
+        return df if not df.empty else pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
 
     except Exception as e:
-        print(f"Error al descargar datos para {ticker}: {e}")
-        # Devolver un DataFrame vacío con las columnas correctas
+        logging.error(f"Error al descargar datos para {ticker} con periodo '{period}': {e}")
         return pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
     
 def process_stock_data(df, ticker):

@@ -27,32 +27,32 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Aplicar tema personalizado
-st.markdown(f"""
-<style>
-    .reportview-container .main .block-container{{
-        max-width: 1200px;
-        padding-top: 2rem;
-        padding-right: 2rem;
-        padding-left: 2rem;
-        padding-bottom: 2rem;
-    }}
-    .stApp {{
-        background-color: {config['streamlit']['theme']['background_color']};
-        color: {config['streamlit']['theme']['text_color']};
-    }}
-    .stButton>button {{
-        background-color: {config['streamlit']['theme']['primary_color']};
-        color: white;
-    }}
-    .stProgress > div > div > div > div {{
-        background-color: {config['streamlit']['theme']['primary_color']};
-    }}
-    .stSelectbox label, .stSlider label {{
-        color: {config['streamlit']['theme']['text_color']};
-    }}
-</style>
-""", unsafe_allow_html=True)
+# # Aplicar tema personalizado
+# st.markdown(f"""
+# <style>
+#     .reportview-container .main .block-container{{
+#         max-width: 1200px;
+#         padding-top: 2rem;
+#         padding-right: 2rem;
+#         padding-left: 2rem;
+#         padding-bottom: 2rem;
+#     }}
+#     .stApp {{
+#         background-color: {config['streamlit']['theme']['background_color']};
+#         color: {config['streamlit']['theme']['text_color']};
+#     }}
+#     .stButton>button {{
+#         background-color: {config['streamlit']['theme']['primary_color']};
+#         color: white;
+#     }}
+#     .stProgress > div > div > div > div {{
+#         background-color: {config['streamlit']['theme']['primary_color']};
+#     }}
+#     .stSelectbox label, .stSlider label {{
+#         color: {config['streamlit']['theme']['text_color']};
+#     }}
+# </style>
+# """, unsafe_allow_html=True)
 
 # Título de la aplicación
 st.title("📈 Dashboard de Acciones Españolas")
