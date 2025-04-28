@@ -1,0 +1,11 @@
+ticker,success,file_path,rows,duration
+SAN.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\SAN_MC_historical.csv,256,2.6236960887908936
+BBVA.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv,256,2.6147117614746094
+IBE.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv,256,2.617266893386841
+ITX.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv,256,1.1347274780273438
+TEF.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv,256,2.122384548187256
+REP.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\REP_MC_historical.csv,256,2.084498643875122
+CABK.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\CABK_MC_historical.csv,256,2.0878071784973145
+NTGY.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\NTGY_MC_historical.csv,256,1.4440784454345703
+FER.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\FER_MC_historical.csv,256,1.7491874694824219
+AMS.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\AMS_MC_historical.csv,256,1.619652509689331

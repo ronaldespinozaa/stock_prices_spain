@@ -1,0 +1,11 @@
+ticker,success,file_path,rows,duration,error
+SAN.MC,False,,0,1.9081130027770996,Cannot set a DataFrame with multiple columns to the single column Price
+BBVA.MC,False,,0,1.9079251289367676,Cannot set a DataFrame with multiple columns to the single column Price
+IBE.MC,False,,0,1.9058730602264404,Cannot set a DataFrame with multiple columns to the single column Price
+ITX.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv,256,0.9612853527069092,
+TEF.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv,256,2.0880937576293945,
+REP.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\REP_MC_historical.csv,256,1.9497716426849365,
+CABK.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\CABK_MC_historical.csv,256,1.2022716999053955,
+NTGY.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\NTGY_MC_historical.csv,256,1.2006621360778809,
+FER.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\FER_MC_historical.csv,256,1.0438814163208008,
+AMS.MC,True,C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\AMS_MC_historical.csv,256,2.095266819000244,

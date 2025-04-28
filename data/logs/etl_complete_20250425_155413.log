@@ -1,0 +1,16 @@
+2025-04-25 15:54:13,054 - __main__ - INFO - Iniciando ETL completo (20250425_155413)
+2025-04-25 15:54:13,054 - __main__ - INFO - Iniciando fase de EXTRACCIÓN
+2025-04-25 15:54:13,055 - __main__ - INFO - Procesando 10 símbolos: ['SAN.MC', 'BBVA.MC', 'IBE.MC', 'ITX.MC', 'TEF.MC', 'REP.MC', 'CABK.MC', 'NTGY.MC', 'FER.MC', 'AMS.MC']
+2025-04-25 15:54:13,055 - src.etl.extraction.historical_extraction - INFO - Inicializado extractor para 10 tickers, max_workers=2, period=5y
+2025-04-25 15:54:13,055 - __main__ - ERROR - Error en el ETL completo: 'HistoricalDataExtractor' object has no attribute 'ticker'
+Traceback (most recent call last):
+  File "C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\scripts\run_complete_etl.py", line 185, in main
+    extraction_results = run_extraction(config, args)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\scripts\run_complete_etl.py", line 72, in run_extraction
+    results = extractor.process_tickers_in_batches(args.batch_size)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\src\etl\extraction\historical_extraction.py", line 100, in process_tickers_in_batches
+    logger.info(f"Procesando {len(self.ticker)} en lotes de {batch_size}")
+                                  ^^^^^^^^^^^
+AttributeError: 'HistoricalDataExtractor' object has no attribute 'ticker'

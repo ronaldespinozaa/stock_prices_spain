@@ -1,0 +1,63 @@
+2025-04-25 16:06:06,433 - __main__ - INFO - Iniciando ETL completo (20250425_160606)
+2025-04-25 16:06:06,433 - __main__ - INFO - Iniciando fase de EXTRACCIÓN
+2025-04-25 16:06:06,434 - __main__ - INFO - Procesando 10 símbolos: ['SAN.MC', 'BBVA.MC', 'IBE.MC', 'ITX.MC', 'TEF.MC', 'REP.MC', 'CABK.MC', 'NTGY.MC', 'FER.MC', 'AMS.MC']
+2025-04-25 16:06:06,435 - src.etl.extraction.historical_extraction - INFO - Inicializado extractor para 10 tickers, max_workers=2, period=5y
+2025-04-25 16:06:06,435 - src.etl.extraction.historical_extraction - INFO - Procesando 10 en lotes de 3
+2025-04-25 16:06:06,438 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['SAN.MC', 'BBVA.MC', 'IBE.MC']
+2025-04-25 16:06:06,439 - src.utils.stock_utils - INFO - Descargando datos para SAN.MC con período 5y e intervalo 1d
+2025-04-25 16:06:06,440 - src.utils.stock_utils - INFO - Descargando datos para BBVA.MC con período 5y e intervalo 1d
+2025-04-25 16:06:08,164 - src.utils.stock_utils - INFO - Descargados 1281 registros para BBVA.MC
+2025-04-25 16:06:08,171 - src.utils.stock_utils - INFO - Descargados 1281 registros para SAN.MC
+2025-04-25 16:06:08,171 - src.utils.stock_utils - INFO - Guardando datos de BBVA.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv
+2025-04-25 16:06:08,218 - src.etl.extraction.historical_extraction - ERROR - Error al procesar BBVA.MC: 'Date'
+2025-04-25 16:06:08,219 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 5y e intervalo 1d
+2025-04-25 16:06:08,221 - src.utils.stock_utils - INFO - Guardando datos de SAN.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\SAN_MC_historical.csv
+2025-04-25 16:06:08,267 - src.etl.extraction.historical_extraction - ERROR - Error al procesar SAN.MC: 'Date'
+2025-04-25 16:06:09,675 - src.utils.stock_utils - INFO - Descargados 1281 registros para IBE.MC
+2025-04-25 16:06:09,677 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 16:06:09,685 - src.etl.extraction.historical_extraction - ERROR - Error al procesar IBE.MC: 'Date'
+2025-04-25 16:06:09,685 - src.etl.extraction.historical_extraction - INFO - Esperando 15 segundos antes del siguiente lote...
+2025-04-25 16:06:24,686 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['BBVA.MC', 'IBE.MC', 'ITX.MC']
+2025-04-25 16:06:24,687 - src.utils.stock_utils - INFO - Descargando datos para BBVA.MC con período 5y e intervalo 1d
+2025-04-25 16:06:24,688 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 5y e intervalo 1d
+2025-04-25 16:06:25,662 - src.utils.stock_utils - INFO - Descargados 1281 registros para BBVA.MC
+2025-04-25 16:06:25,663 - src.utils.stock_utils - INFO - Guardando datos de BBVA.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv
+2025-04-25 16:06:25,672 - src.etl.extraction.historical_extraction - ERROR - Error al procesar BBVA.MC: 'Date'
+2025-04-25 16:06:25,672 - src.utils.stock_utils - INFO - Descargando datos para ITX.MC con período 5y e intervalo 1d
+2025-04-25 16:06:26,076 - src.utils.stock_utils - INFO - Descargados 1281 registros para IBE.MC
+2025-04-25 16:06:26,077 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 16:06:26,086 - src.etl.extraction.historical_extraction - ERROR - Error al procesar IBE.MC: 'Date'
+2025-04-25 16:06:26,911 - src.utils.stock_utils - INFO - Descargados 1281 registros para ITX.MC
+2025-04-25 16:06:26,911 - src.utils.stock_utils - INFO - Guardando datos de ITX.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv
+2025-04-25 16:06:26,920 - src.etl.extraction.historical_extraction - ERROR - Error al procesar ITX.MC: 'Date'
+2025-04-25 16:06:26,920 - src.etl.extraction.historical_extraction - INFO - Esperando 15 segundos antes del siguiente lote...
+2025-04-25 16:06:41,922 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['IBE.MC', 'ITX.MC', 'TEF.MC']
+2025-04-25 16:06:41,923 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 5y e intervalo 1d
+2025-04-25 16:06:41,923 - src.utils.stock_utils - INFO - Descargando datos para ITX.MC con período 5y e intervalo 1d
+2025-04-25 16:06:42,758 - src.utils.stock_utils - INFO - Descargados 1281 registros para IBE.MC
+2025-04-25 16:06:42,759 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 16:06:42,769 - src.etl.extraction.historical_extraction - ERROR - Error al procesar IBE.MC: 'Date'
+2025-04-25 16:06:42,769 - src.utils.stock_utils - INFO - Descargando datos para TEF.MC con período 5y e intervalo 1d
+2025-04-25 16:06:43,538 - src.utils.stock_utils - INFO - Descargados 1281 registros para ITX.MC
+2025-04-25 16:06:43,539 - src.utils.stock_utils - INFO - Guardando datos de ITX.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv
+2025-04-25 16:06:43,547 - src.etl.extraction.historical_extraction - ERROR - Error al procesar ITX.MC: 'Date'
+2025-04-25 16:06:44,576 - src.utils.stock_utils - INFO - Descargados 1281 registros para TEF.MC
+2025-04-25 16:06:44,577 - src.utils.stock_utils - INFO - Guardando datos de TEF.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv
+2025-04-25 16:06:44,586 - src.etl.extraction.historical_extraction - ERROR - Error al procesar TEF.MC: 'Date'
+2025-04-25 16:06:44,586 - src.etl.extraction.historical_extraction - INFO - Esperando 15 segundos antes del siguiente lote...
+2025-04-25 16:06:59,587 - src.etl.extraction.historical_extraction - INFO - Procesamiento completado: 0/9 símbolos extraídos correctamente
+2025-04-25 16:06:59,593 - src.etl.extraction.historical_extraction - INFO - Informe de extracción guardado en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\reports\extraction_report_20250425_160659.csv
+2025-04-25 16:06:59,594 - __main__ - INFO - Extracción completada: 0/9 símbolos procesados correctamente
+2025-04-25 16:06:59,594 - __main__ - INFO - Informe guardado en: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\reports\extraction_report_20250425_160659.csv
+2025-04-25 16:06:59,594 - __main__ - INFO - Iniciando fase de PROCESAMIENTO
+2025-04-25 16:06:59,595 - src.etl.processing.data_processor - INFO - Inicializado procesador de datos con directorio raw: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw
+2025-04-25 16:06:59,596 - src.etl.processing.data_processor - INFO - Encontrados 0 archivos para procesar
+2025-04-25 16:06:59,596 - src.etl.processing.data_processor - INFO - Procesamiento completado: 0/0 archivos procesados correctamente
+2025-04-25 16:06:59,596 - __main__ - INFO - Procesamiento completado: 0/0 archivos procesados
+2025-04-25 16:06:59,597 - __main__ - INFO - Iniciando fase de CARGA EN BASE DE DATOS
+2025-04-25 16:06:59,597 - src.etl.loading.db_loader - INFO - Inicializado cargador de base de datos: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\database\stocks.db
+2025-04-25 16:06:59,599 - src.etl.loading.db_loader - INFO - Encontrados 0 archivos procesados para cargar
+2025-04-25 16:06:59,601 - src.etl.loading.db_loader - INFO - Base de datos inicializada correctamente
+2025-04-25 16:06:59,601 - src.etl.loading.db_loader - INFO - Carga en base de datos completada: 0/0 archivos cargados correctamente
+2025-04-25 16:06:59,602 - __main__ - INFO - Carga en base de datos completada: 0/0 archivos cargados
+2025-04-25 16:06:59,602 - __main__ - INFO - ETL completo finalizado con éxito

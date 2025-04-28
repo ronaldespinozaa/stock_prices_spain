@@ -1,129 +1,124 @@
+import yfinance as yf
+import time
+import logging
 import pandas as pd
 import numpy as np
-import yfinance as yf
-from datetime import datetime, timedelta
-import logging
-import os
 
-import yfinance as yf
-import pandas as pd
-import logging
+import requests
 
-def download_stock_data(ticker, period):
+logger = logging.getLogger(__name__)
+
+def download_daily_data(tickers, start_date, end_date, max_reintentos=5, espera_base=5):
+    data = {}
+
+    for ticker in tickers:
+        exito = False
+
+        for intento in range(max_reintentos):
+            try:
+                print(f"Descargando datos para {ticker} (intento {intento + 1})...")
+                df = yf.download(ticker, start=start_date, end=end_date, progress=False)
+
+                if not df.empty:
+                    data[ticker] = df
+                    exito = True
+                    break
+                else:
+                    raise ValueError("DataFrame vacío (posible rate limit o ticker incorrecto)")
+
+            except (requests.exceptions.RequestException, ValueError) as e:
+                espera = espera_base * (2 ** intento)
+                print(f"Error al descargar {ticker}: {e}. Reintentando en {espera} segundos...")
+                time.sleep(espera)
+
+            except Exception as e:
+                espera = espera_base * (2 ** intento)
+                print(f"Error inesperado al descargar {ticker}: {e}. Reintentando en {espera} segundos...")
+                time.sleep(espera)
+
+        if not exito:
+            print(f"No se pudo descargar {ticker} tras {max_reintentos} intentos.")
+
+    return data
+    
+def process_stock_data(data_dict):
     """
-    Descarga datos históricos desde yfinance usando el parámetro 'period'.
+    Procesa y limpia los datos de múltiples acciones.
 
     Args:
-        ticker (str): Símbolo de la acción (ej. 'SAN.MC')
-        period (str): Periodo de descarga (ej. '3y', 'max').
-                      Valores válidos: '1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'
+        data_dict (dict): Diccionario con tickers como claves y DataFrames crudos como valores
 
     Returns:
-        pandas.DataFrame: DataFrame con los datos históricos, o un DataFrame vacío en caso de error.
+        pandas.DataFrame: DataFrame combinado y procesado
     """
-    valid_periods = ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
-    if period not in valid_periods:
-        logging.error(f"El periodo '{period}' no es válido para {ticker}.")
-        return pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
+    all_data = []
 
-    try:
-        df = yf.download(
-            ticker,
-            period=period,
-            progress=False,
-            threads=True,
-            auto_adjust=True,
-            timeout=30
-        )
+    for ticker, df in data_dict.items():
+        # Si el DataFrame está vacío, continuar con el siguiente
+        if df.empty:
+            continue
 
-        if not df.empty:
-            logging.info(f"Datos descargados correctamente para {ticker} con periodo '{period}'.Se han descargado {len(df)} filas.")
-        else:
-            logging.warning(f"No se encontraron datos para {ticker} con periodo '{period}'.")
+        # Crear una copia para no modificar el original
+        processed_df = df.copy()
 
-        return df if not df.empty else pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
+        # Renombrar columnas
+        processed_df.columns = [col.lower() for col in processed_df.columns]
 
-    except Exception as e:
-        logging.error(f"Error al descargar datos para {ticker} con periodo '{period}': {e}")
-        return pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
-    
-def process_stock_data(df, ticker):
-    """
-Procesa y limpia los datos de una acción.
+        # Añadir columna de ticker y fecha
+        processed_df['ticker'] = ticker
+        processed_df['date'] = processed_df.index
 
-Args:
-    df (pandas.DataFrame): DataFrame con datos crudos
-    ticker (str): Símbolo de la acción
-    
-Returns:
-    pandas.DataFrame: DataFrame procesado
-"""
-# Si el DataFrame está vacío, devolver un DataFrame vacío
-    if df.empty:
-        return pd.DataFrame()
+        # Calcular retornos diarios
+        processed_df['daily_return'] = processed_df['adj close'].pct_change()
 
-    # Crear una copia para no modificar el original
-    processed_df = df.copy()
+        # Media móvil de 20, 50, 200 días
+        processed_df['ma20'] = processed_df['close'].rolling(window=20).mean()
+        processed_df['ma50'] = processed_df['close'].rolling(window=50).mean()
+        processed_df['ma200'] = processed_df['close'].rolling(window=200).mean()
 
-    # Renombrar columnas
-    processed_df.columns = [col.lower() for col in processed_df.columns]
+        # RSI de 14 días
+        delta = processed_df['close'].diff()
+        gain = delta.where(delta > 0, 0).rolling(window=14).mean()
+        loss = -delta.where(delta < 0, 0).rolling(window=14).mean()
+        rs = gain / loss
+        processed_df['rsi14'] = 100 - (100 / (1 + rs))
 
-    # Añadir columna de ticker
-    processed_df['ticker'] = ticker
+        # MACD
+        exp1 = processed_df['close'].ewm(span=12, adjust=False).mean()
+        exp2 = processed_df['close'].ewm(span=26, adjust=False).mean()
+        processed_df['macd'] = exp1 - exp2
+        processed_df['macd_signal'] = processed_df['macd'].ewm(span=9, adjust=False).mean()
+        processed_df['macd_hist'] = processed_df['macd'] - processed_df['macd_signal']
 
-    # Añadir columna de fecha (útil cuando se convierte a formato tabular)
-    processed_df['date'] = processed_df.index
+        # Bollinger Bands
+        processed_df['bb_middle'] = processed_df['close'].rolling(window=20).mean()
+        processed_df['bb_std'] = processed_df['close'].rolling(window=20).std()
+        processed_df['bb_upper'] = processed_df['bb_middle'] + 2 * processed_df['bb_std']
+        processed_df['bb_lower'] = processed_df['bb_middle'] - 2 * processed_df['bb_std']
 
-    # Calcular retornos diarios
-    processed_df['daily_return'] = processed_df['adj close'].pct_change()
+        # Limpiar valores NaN
+        processed_df = processed_df.fillna(0)
 
-    # Calcular indicadores técnicos básicos
+        # Añadir al conjunto de datos procesados
+        all_data.append(processed_df)
 
-    # Media móvil de 20 días
-    processed_df['ma20'] = processed_df['close'].rolling(window=20).mean()
+    # Unir todos los DataFrames
+    final_df = pd.concat(all_data, ignore_index=True)
 
-    # Media móvil de 50 días
-    processed_df['ma50'] = processed_df['close'].rolling(window=50).mean()
+    return final_df
 
-    # Media móvil de 200 días
-    processed_df['ma200'] = processed_df['close'].rolling(window=200).mean()
-
-    # RSI (Relative Strength Index) de 14 días
-    delta = processed_df['close'].diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
-    rs = gain / loss
-    processed_df['rsi14'] = 100 - (100 / (1 + rs))
-
-    # MACD (Moving Average Convergence Divergence)
-    exp1 = processed_df['close'].ewm(span=12, adjust=False).mean()
-    exp2 = processed_df['close'].ewm(span=26, adjust=False).mean()
-    processed_df['macd'] = exp1 - exp2
-    processed_df['macd_signal'] = processed_df['macd'].ewm(span=9, adjust=False).mean()
-    processed_df['macd_hist'] = processed_df['macd'] - processed_df['macd_signal']
-
-    # Bollinger Bands
-    processed_df['bb_middle'] = processed_df['close'].rolling(window=20).mean()
-    processed_df['bb_std'] = processed_df['close'].rolling(window=20).std()
-    processed_df['bb_upper'] = processed_df['bb_middle'] + (processed_df['bb_std'] * 2)
-    processed_df['bb_lower'] = processed_df['bb_middle'] - (processed_df['bb_std'] * 2)
-
-    # Limpiar valores NaN
-    processed_df = processed_df.fillna(0)
-
-    return processed_df
 def calculate_portfolio_metrics(df_dict, weights=None):
     """
-Calcula métricas para un portafolio de acciones.
+    Calcula métricas para un portafolio de acciones.
 
-Args:
-    df_dict (dict): Diccionario con DataFrames de acciones {ticker: df}
-    weights (dict, optional): Pesos de cada acción en el portafolio {ticker: peso}
-    
-Returns:
-    pandas.DataFrame: DataFrame con métricas del portafolio
-"""
-# Si no se proporcionan pesos, usar pesos iguales
+    Args:
+        df_dict (dict): Diccionario con DataFrames de acciones {ticker: df}
+        weights (dict, optional): Pesos de cada acción en el portafolio {ticker: peso}
+
+    Returns:
+        pandas.DataFrame: DataFrame con métricas del portafolio
+    """
+    # Si no se proporcionan pesos, usar pesos iguales
     if weights is None:
         n = len(df_dict)
         weights = {ticker: 1/n for ticker in df_dict.keys()}
@@ -166,3 +161,4 @@ Returns:
     metrics_df = metrics_df.fillna(0)
 
     return metrics_df
+

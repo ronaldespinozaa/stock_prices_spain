@@ -1,0 +1,84 @@
+2025-04-25 19:34:04,424 - __main__ - INFO - Iniciando ETL completo (20250425_193404)
+2025-04-25 19:34:04,424 - __main__ - INFO - Iniciando fase de EXTRACCIÓN
+2025-04-25 19:34:04,425 - __main__ - INFO - Procesando 10 símbolos: ['SAN.MC', 'BBVA.MC', 'IBE.MC', 'ITX.MC', 'TEF.MC', 'REP.MC', 'CABK.MC', 'NTGY.MC', 'FER.MC', 'AMS.MC']
+2025-04-25 19:34:04,427 - src.etl.extraction.historical_extraction - INFO - Inicializado extractor para 10 tickers, max_workers=3, period=1y
+2025-04-25 19:34:04,427 - src.etl.extraction.historical_extraction - INFO - Procesando 10 en lotes de 5
+2025-04-25 19:34:04,428 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['SAN.MC', 'BBVA.MC', 'IBE.MC', 'ITX.MC', 'TEF.MC']
+2025-04-25 19:34:04,430 - src.utils.stock_utils - INFO - Descargando datos para SAN.MC con período 1y e intervalo 1d
+2025-04-25 19:34:04,431 - src.utils.stock_utils - INFO - Descargando datos para BBVA.MC con período 1y e intervalo 1d
+2025-04-25 19:34:04,432 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 1y e intervalo 1d
+2025-04-25 19:34:06,112 - src.utils.stock_utils - INFO - Descargados 256 registros para IBE.MC
+2025-04-25 19:34:06,129 - src.utils.stock_utils - INFO - Descargados 256 registros para SAN.MC
+2025-04-25 19:34:06,129 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 19:34:06,130 - src.utils.stock_utils - INFO - Descargados 256 registros para BBVA.MC
+2025-04-25 19:34:06,171 - src.utils.stock_utils - INFO - Guardando datos de SAN.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\SAN_MC_historical.csv
+2025-04-25 19:34:06,173 - src.utils.stock_utils - INFO - Guardando datos de BBVA.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv
+2025-04-25 19:34:06,302 - src.utils.stock_utils - INFO - Descargando datos para ITX.MC con período 1y e intervalo 1d
+2025-04-25 19:34:06,308 - src.utils.stock_utils - INFO - Descargando datos para TEF.MC con período 1y e intervalo 1d
+2025-04-25 19:34:07,333 - src.utils.stock_utils - INFO - Descargados 256 registros para TEF.MC
+2025-04-25 19:34:07,334 - src.utils.stock_utils - INFO - Guardando datos de TEF.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv
+2025-04-25 19:34:08,007 - src.utils.stock_utils - INFO - Descargados 256 registros para ITX.MC
+2025-04-25 19:34:08,009 - src.utils.stock_utils - INFO - Guardando datos de ITX.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv
+2025-04-25 19:34:08,076 - src.etl.extraction.historical_extraction - INFO - Esperando 5 segundos antes del siguiente lote...
+2025-04-25 19:34:13,078 - src.etl.extraction.historical_extraction - INFO - Procesando lote 2: ['REP.MC', 'CABK.MC', 'NTGY.MC', 'FER.MC', 'AMS.MC']
+2025-04-25 19:34:13,080 - src.utils.stock_utils - INFO - Descargando datos para REP.MC con período 1y e intervalo 1d
+2025-04-25 19:34:13,081 - src.utils.stock_utils - INFO - Descargando datos para CABK.MC con período 1y e intervalo 1d
+2025-04-25 19:34:13,082 - src.utils.stock_utils - INFO - Descargando datos para NTGY.MC con período 1y e intervalo 1d
+2025-04-25 19:34:14,873 - src.utils.stock_utils - INFO - Descargados 256 registros para REP.MC
+2025-04-25 19:34:14,875 - src.utils.stock_utils - INFO - Guardando datos de REP.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\REP_MC_historical.csv
+2025-04-25 19:34:14,954 - src.utils.stock_utils - INFO - Descargando datos para FER.MC con período 1y e intervalo 1d
+2025-04-25 19:34:15,156 - src.utils.stock_utils - INFO - Descargados 256 registros para CABK.MC
+2025-04-25 19:34:15,164 - src.utils.stock_utils - INFO - Descargados 256 registros para NTGY.MC
+2025-04-25 19:34:15,166 - src.utils.stock_utils - INFO - Guardando datos de CABK.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\CABK_MC_historical.csv
+2025-04-25 19:34:15,167 - src.utils.stock_utils - INFO - Guardando datos de NTGY.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\NTGY_MC_historical.csv
+2025-04-25 19:34:15,300 - src.utils.stock_utils - INFO - Descargando datos para AMS.MC con período 1y e intervalo 1d
+2025-04-25 19:34:15,999 - src.utils.stock_utils - INFO - Descargados 256 registros para FER.MC
+2025-04-25 19:34:16,001 - src.utils.stock_utils - INFO - Guardando datos de FER.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\FER_MC_historical.csv
+2025-04-25 19:34:17,431 - src.utils.stock_utils - INFO - Descargados 256 registros para AMS.MC
+2025-04-25 19:34:17,433 - src.utils.stock_utils - INFO - Guardando datos de AMS.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\AMS_MC_historical.csv
+2025-04-25 19:34:17,502 - src.etl.extraction.historical_extraction - INFO - Procesamiento completado: 10/10 símbolos extraídos correctamente
+2025-04-25 19:34:17,508 - src.etl.extraction.historical_extraction - INFO - Informe de extracción guardado en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\reports\extraction_report_20250425_193417.csv
+2025-04-25 19:34:17,509 - __main__ - INFO - Extracción completada: 10/10 símbolos procesados correctamente
+2025-04-25 19:34:17,510 - __main__ - INFO - Informe guardado en: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\reports\extraction_report_20250425_193417.csv
+2025-04-25 19:34:17,510 - __main__ - INFO - Iniciando fase de PROCESAMIENTO
+2025-04-25 19:34:17,513 - src.etl.processing.data_processor - INFO - Inicializado procesador de datos con directorio raw: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw
+2025-04-25 19:34:17,515 - src.etl.processing.data_processor - INFO - Encontrados 10 archivos para procesar
+2025-04-25 19:34:17,531 - src.etl.processing.data_processor - INFO - Datos procesados para AMS: 256 registros
+2025-04-25 19:34:17,548 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\AMS_processed.csv
+2025-04-25 19:34:17,564 - src.etl.processing.data_processor - INFO - Datos procesados para BBVA: 256 registros
+2025-04-25 19:34:17,578 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\BBVA_processed.csv
+2025-04-25 19:34:17,592 - src.etl.processing.data_processor - INFO - Datos procesados para CABK: 256 registros
+2025-04-25 19:34:17,618 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\CABK_processed.csv
+2025-04-25 19:34:17,643 - src.etl.processing.data_processor - INFO - Datos procesados para FER: 256 registros
+2025-04-25 19:34:17,664 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\FER_processed.csv
+2025-04-25 19:34:17,685 - src.etl.processing.data_processor - INFO - Datos procesados para IBE: 256 registros
+2025-04-25 19:34:17,707 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\IBE_processed.csv
+2025-04-25 19:34:17,719 - src.etl.processing.data_processor - INFO - Datos procesados para ITX: 256 registros
+2025-04-25 19:34:17,738 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\ITX_processed.csv
+2025-04-25 19:34:17,755 - src.etl.processing.data_processor - INFO - Datos procesados para NTGY: 256 registros
+2025-04-25 19:34:17,770 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\NTGY_processed.csv
+2025-04-25 19:34:17,782 - src.etl.processing.data_processor - INFO - Datos procesados para REP: 256 registros
+2025-04-25 19:34:17,796 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\REP_processed.csv
+2025-04-25 19:34:17,808 - src.etl.processing.data_processor - INFO - Datos procesados para SAN: 256 registros
+2025-04-25 19:34:17,821 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\SAN_processed.csv
+2025-04-25 19:34:17,833 - src.etl.processing.data_processor - INFO - Datos procesados para TEF: 256 registros
+2025-04-25 19:34:17,847 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\TEF_processed.csv
+2025-04-25 19:34:17,848 - src.etl.processing.data_processor - INFO - Procesamiento completado: 10/10 archivos procesados correctamente
+2025-04-25 19:34:17,848 - __main__ - INFO - Procesamiento completado: 10/10 archivos procesados
+2025-04-25 19:34:17,849 - __main__ - INFO - Iniciando fase de CARGA EN BASE DE DATOS
+2025-04-25 19:34:17,851 - src.etl.loading.db_loader - INFO - Inicializado cargador de base de datos: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\database\stocks.db
+2025-04-25 19:34:17,852 - src.etl.loading.db_loader - INFO - Encontrados 10 archivos procesados para cargar
+2025-04-25 19:34:17,855 - src.etl.loading.db_loader - INFO - Base de datos inicializada correctamente
+2025-04-25 19:34:17,915 - src.etl.loading.db_loader - ERROR - Error al cargar datos para AMS en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:17,967 - src.etl.loading.db_loader - ERROR - Error al cargar datos para BBVA en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,045 - src.etl.loading.db_loader - ERROR - Error al cargar datos para CABK en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,110 - src.etl.loading.db_loader - ERROR - Error al cargar datos para FER en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,169 - src.etl.loading.db_loader - ERROR - Error al cargar datos para IBE en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,230 - src.etl.loading.db_loader - ERROR - Error al cargar datos para ITX en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,291 - src.etl.loading.db_loader - ERROR - Error al cargar datos para NTGY en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,346 - src.etl.loading.db_loader - ERROR - Error al cargar datos para REP en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,395 - src.etl.loading.db_loader - ERROR - Error al cargar datos para SAN en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,447 - src.etl.loading.db_loader - ERROR - Error al cargar datos para TEF en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 19:34:18,448 - src.etl.loading.db_loader - INFO - Carga en base de datos completada: 0/10 archivos cargados correctamente
+2025-04-25 19:34:18,448 - __main__ - INFO - Carga en base de datos completada: 0/10 archivos cargados
+2025-04-25 19:34:18,449 - __main__ - INFO - ETL completo finalizado con éxito

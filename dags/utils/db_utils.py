@@ -1,8 +1,7 @@
 import sqlite3
 import pandas as pd
-import os
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -27,8 +26,8 @@ def create_db_connection(db_path):
 
 def create_database(conn):
     """
-    Crea las tablas necesarias en la base de datos si no existen
-    
+    Crea las tablas necesarias en la base de datos si no existen.
+
     Args:
         conn: Objeto de conexión a la base de datos SQLite
     """
@@ -115,10 +114,8 @@ def save_to_database(conn, df, ticker, data_type):
         return True
 
     except Exception as e:
-        print(f"Error al guardar datos en la base de datos: {str(e)}")
-        # En un entorno de producción, es mejor usar un logger configurado
-        # logger.error(f"Error al guardar datos en la base de datos: {str(e)}")
-        raise
+        logger.error(f"Error al guardar datos en la base de datos: {str(e)}")
+        return False
 
 def get_stock_data(conn, ticker, data_type, start_date, end_date):
     """
@@ -138,16 +135,6 @@ def get_stock_data(conn, ticker, data_type, start_date, end_date):
         # Determinar la tabla de origen
         table_name = f"{data_type}_data"
 
-        # Validar que las fechas estén en el formato correcto
-        start_date_str = start_date
-        end_date_str = end_date
-        
-        # Si las fechas son objetos datetime, convertirlas a string
-        if hasattr(start_date, 'strftime'):
-            start_date_str = start_date.strftime('%Y-%m-%d')
-        if hasattr(end_date, 'strftime'):
-            end_date_str = end_date.strftime('%Y-%m-%d')
-
         # Consulta SQL
         query = f'''
         SELECT *
@@ -157,7 +144,7 @@ def get_stock_data(conn, ticker, data_type, start_date, end_date):
         '''
 
         # Ejecutar consulta
-        df = pd.read_sql_query(query, conn, params=(ticker, start_date_str, end_date_str))
+        df = pd.read_sql_query(query, conn, params=(ticker, start_date, end_date))
 
         # Convertir fecha a índice
         if not df.empty:
@@ -173,9 +160,7 @@ def get_stock_data(conn, ticker, data_type, start_date, end_date):
         return df
 
     except Exception as e:
-        print(f"Error al obtener datos de {ticker}: {str(e)}")
-        # En un entorno de producción, usar un logger configurado:
-        # logger.error(f"Error al obtener datos de {ticker}: {str(e)}")
+        logger.error(f"Error al obtener datos de {ticker}: {str(e)}")
         return pd.DataFrame()
 
 def get_portfolio_metrics(conn, tickers, start_date, end_date):
@@ -207,7 +192,7 @@ def get_portfolio_metrics(conn, tickers, start_date, end_date):
                 portfolio_data[ticker] = df
 
         if not portfolio_data:
-            print("No hay datos disponibles para los tickers solicitados en el rango de fechas especificado")
+            logger.error("No hay datos disponibles para los tickers solicitados en el rango de fechas especificado")
             return None
 
         # Calcular retornos diarios
@@ -219,44 +204,30 @@ def get_portfolio_metrics(conn, tickers, start_date, end_date):
         # Calcular matriz de correlación
         corr_matrix = returns_df.corr()
 
-        # Calcular rendimiento acumulado
+        # Calcular rendimiento acumulado y anualizado
         cumulative_returns = {}
         annual_returns = {}
+        volatility = {}
+        sharpe_ratio = {}
+        max_drawdown = {}
         trading_days_per_year = 252
 
         for ticker, df in portfolio_data.items():
-            # Rendimiento acumulado total
+            # Rendimiento acumulado
             cumulative_returns[ticker] = (1 + df['daily_return'].fillna(0)).cumprod().iloc[-1] - 1
             
             # Rendimiento anualizado
             days_in_sample = len(df)
-            if days_in_sample > 0:
-                annual_returns[ticker] = (1 + cumulative_returns[ticker]) ** (trading_days_per_year / days_in_sample) - 1
-            else:
-                annual_returns[ticker] = 0
+            annual_returns[ticker] = (1 + cumulative_returns[ticker]) ** (trading_days_per_year / days_in_sample) - 1 if days_in_sample > 0 else 0
 
-        # Calcular volatilidad anualizada
-        volatility = {}
-
-        for ticker, df in portfolio_data.items():
+            # Volatilidad anualizada
             volatility[ticker] = df['daily_return'].std() * (trading_days_per_year ** 0.5)
 
-        # Calcular ratio de Sharpe (asumiendo tasa libre de riesgo de 0%)
-        sharpe_ratio = {}
-        risk_free_rate = 0.03  # 3% como ejemplo, ajustar según el mercado actual
+            # Sharpe Ratio
+            risk_free_rate = 0.03  # 3% como ejemplo
+            sharpe_ratio[ticker] = (annual_returns[ticker] - risk_free_rate) / volatility[ticker] if volatility[ticker] > 0 else 0
 
-        for ticker in portfolio_data.keys():
-            if volatility[ticker] > 0:
-                # Usando rendimiento anualizado para el Sharpe ratio
-                sharpe_ratio[ticker] = (annual_returns[ticker] - risk_free_rate) / volatility[ticker]
-            else:
-                sharpe_ratio[ticker] = 0
-        
-        # Calcular drawdown máximo
-        max_drawdown = {}
-        
-        for ticker, df in portfolio_data.items():
-            # Calcular pico acumulativo
+            # Max Drawdown
             cum_returns = (1 + df['daily_return'].fillna(0)).cumprod()
             running_max = cum_returns.cummax()
             drawdown = (cum_returns / running_max) - 1
@@ -275,7 +246,5 @@ def get_portfolio_metrics(conn, tickers, start_date, end_date):
         return summary
 
     except Exception as e:
-        print(f"Error al calcular métricas del portafolio: {str(e)}")
-        # En un entorno de producción:
-        # logger.error(f"Error al calcular métricas del portafolio: {str(e)}")
+        logger.error(f"Error al calcular métricas del portafolio: {str(e)}")
         return None

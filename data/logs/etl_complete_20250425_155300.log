@@ -1,0 +1,11 @@
+2025-04-25 15:53:00,847 - __main__ - INFO - Iniciando ETL completo (20250425_155300)
+2025-04-25 15:53:00,847 - __main__ - INFO - Iniciando fase de EXTRACCIÓN
+2025-04-25 15:53:00,847 - __main__ - ERROR - Error en el ETL completo: 'Namespace' object has no attribute 'symbols'
+Traceback (most recent call last):
+  File "C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\scripts\run_complete_etl.py", line 185, in main
+    extraction_results = run_extraction(config, args)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\scripts\run_complete_etl.py", line 55, in run_extraction
+    tickers = args.symbols if args.symbols else get_tickers(args.config)
+                              ^^^^^^^^^^^^
+AttributeError: 'Namespace' object has no attribute 'symbols'

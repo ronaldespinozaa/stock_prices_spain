@@ -1,0 +1,43 @@
+# config/symbols.yaml
+# Configuración de símbolos a descargar
+# IBEX 35 y otros valores españoles relevantes
+
+symbols:
+  # IBEX 35
+  - IBE.MC   # Iberdrola
+  - SAN.MC   # Banco Santander
+  - TEF.MC   # Telefónica
+  - BBVA.MC  # BBVA
+  - REP.MC   # Repsol
+  - ITX.MC   # Inditex
+  - FER.MC   # Ferrovial
+  - ANA.MC   # Acciona
+  - AENA.MC  # AENA
+  - ELE.MC   # Endesa
+  - CABK.MC  # CaixaBank
+  - GRF.MC   # Grifols
+  - ACS.MC   # ACS
+  - IAG.MC   # IAG
+  - MTS.MC   # ArcelorMittal
+  - CLNX.MC  # Cellnex
+  - COL.MC   # Inmobiliaria Colonial
+  - ACX.MC   # Acerinox
+  - NTGY.MC  # Naturgy
+  - MAP.MC   # Mapfre
+  - SAB.MC   # Banco Sabadell
+  - ENG.MC   # Enagás
+  - MRL.MC   # MERLIN Properties
+  - MEL.MC   # Meliá Hotels
+  - AMS.MC   # Amadeus
+  - BKT.MC   # Bankinter
+  - ROVI.MC  # Laboratorios Rovi
+  - FDR.MC   # Fluidra
+  - LOG.MC   # Logista
+  - SGRE.MC  # Siemens Gamesa
+  
+  # Otros valores relevantes del mercado español
+  - ALM.MC   # Almirall
+  - EBRO.MC  # Ebro Foods
+  - VIS.MC   # Viscofan
+  - IDR.MC   # Indra
+  - TRE.MC   # Técnicas Reunidas

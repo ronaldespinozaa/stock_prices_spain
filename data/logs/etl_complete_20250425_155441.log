@@ -1,0 +1,164 @@
+2025-04-25 15:54:41,841 - __main__ - INFO - Iniciando ETL completo (20250425_155441)
+2025-04-25 15:54:41,842 - __main__ - INFO - Iniciando fase de EXTRACCIÓN
+2025-04-25 15:54:41,842 - __main__ - INFO - Procesando 10 símbolos: ['SAN.MC', 'BBVA.MC', 'IBE.MC', 'ITX.MC', 'TEF.MC', 'REP.MC', 'CABK.MC', 'NTGY.MC', 'FER.MC', 'AMS.MC']
+2025-04-25 15:54:41,843 - src.etl.extraction.historical_extraction - INFO - Inicializado extractor para 10 tickers, max_workers=2, period=5y
+2025-04-25 15:54:41,843 - src.etl.extraction.historical_extraction - INFO - Procesando 10 en lotes de 3
+2025-04-25 15:54:41,844 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['SAN.MC', 'BBVA.MC', 'IBE.MC']
+2025-04-25 15:54:41,844 - src.utils.stock_utils - INFO - Descargando datos para SAN.MC con período 5y e intervalo 1d
+2025-04-25 15:54:41,845 - src.utils.stock_utils - INFO - Descargando datos para BBVA.MC con período 5y e intervalo 1d
+2025-04-25 15:54:42,883 - src.utils.stock_utils - INFO - Descargados 1281 registros para BBVA.MC
+2025-04-25 15:54:42,888 - src.utils.stock_utils - INFO - Descargados 1281 registros para SAN.MC
+2025-04-25 15:54:42,888 - src.utils.stock_utils - INFO - Guardando datos de BBVA.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv
+2025-04-25 15:54:42,902 - src.utils.stock_utils - INFO - Guardando datos de SAN.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\SAN_MC_historical.csv
+2025-04-25 15:54:42,969 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:54:42,970 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 5y e intervalo 1d
+2025-04-25 15:54:42,972 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\SAN_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:54:44,729 - src.utils.stock_utils - INFO - Descargados 1281 registros para IBE.MC
+2025-04-25 15:54:44,730 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 15:54:44,771 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:54:44,772 - src.etl.extraction.historical_extraction - INFO - Esperando 15 segundos antes del siguiente lote...
+2025-04-25 15:54:59,773 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['BBVA.MC', 'IBE.MC', 'ITX.MC']
+2025-04-25 15:54:59,773 - src.utils.stock_utils - INFO - Descargando datos para BBVA.MC con período 5y e intervalo 1d
+2025-04-25 15:54:59,774 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 5y e intervalo 1d
+2025-04-25 15:55:01,344 - src.utils.stock_utils - INFO - Descargados 1281 registros para BBVA.MC
+2025-04-25 15:55:01,345 - src.utils.stock_utils - INFO - Descargados 1281 registros para IBE.MC
+2025-04-25 15:55:01,345 - src.utils.stock_utils - INFO - Guardando datos de BBVA.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv
+2025-04-25 15:55:01,354 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 15:55:01,427 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:55:01,428 - src.utils.stock_utils - INFO - Descargando datos para ITX.MC con período 5y e intervalo 1d
+2025-04-25 15:55:01,433 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:55:02,858 - src.utils.stock_utils - INFO - Descargados 1281 registros para ITX.MC
+2025-04-25 15:55:02,858 - src.utils.stock_utils - INFO - Guardando datos de ITX.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv
+2025-04-25 15:55:02,909 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:55:02,914 - src.etl.extraction.historical_extraction - INFO - Esperando 15 segundos antes del siguiente lote...
+2025-04-25 15:55:17,915 - src.etl.extraction.historical_extraction - INFO - Procesando lote 1: ['IBE.MC', 'ITX.MC', 'TEF.MC']
+2025-04-25 15:55:17,916 - src.utils.stock_utils - INFO - Descargando datos para IBE.MC con período 5y e intervalo 1d
+2025-04-25 15:55:17,917 - src.utils.stock_utils - INFO - Descargando datos para ITX.MC con período 5y e intervalo 1d
+2025-04-25 15:55:19,522 - src.utils.stock_utils - INFO - Descargados 1281 registros para IBE.MC
+2025-04-25 15:55:19,525 - src.utils.stock_utils - INFO - Descargados 1281 registros para ITX.MC
+2025-04-25 15:55:19,526 - src.utils.stock_utils - INFO - Guardando datos de IBE.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 15:55:19,526 - src.utils.stock_utils - INFO - Guardando datos de ITX.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv
+2025-04-25 15:55:19,606 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:55:19,606 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:55:19,607 - src.utils.stock_utils - INFO - Descargando datos para TEF.MC con período 5y e intervalo 1d
+2025-04-25 15:55:20,756 - src.utils.stock_utils - INFO - Descargados 1281 registros para TEF.MC
+2025-04-25 15:55:20,757 - src.utils.stock_utils - INFO - Guardando datos de TEF.MC en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv
+2025-04-25 15:55:20,810 - src.utils.stock_utils - WARNING - El archivo C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv no tiene el formato de encabezado esperado
+2025-04-25 15:55:20,814 - src.etl.extraction.historical_extraction - INFO - Esperando 15 segundos antes del siguiente lote...
+2025-04-25 15:55:35,816 - src.etl.extraction.historical_extraction - INFO - Procesamiento completado: 0/9 símbolos extraídos correctamente
+2025-04-25 15:55:35,819 - src.etl.extraction.historical_extraction - INFO - Informe de extracción guardado en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\reports\extraction_report_20250425_155535.csv
+2025-04-25 15:55:35,819 - __main__ - INFO - Extracción completada: 0/9 símbolos procesados correctamente
+2025-04-25 15:55:35,819 - __main__ - INFO - Informe guardado en: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\reports\extraction_report_20250425_155535.csv
+2025-04-25 15:55:35,819 - __main__ - INFO - Iniciando fase de PROCESAMIENTO
+2025-04-25 15:55:35,819 - src.etl.processing.data_processor - INFO - Inicializado procesador de datos con directorio raw: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw
+2025-04-25 15:55:35,819 - src.etl.processing.data_processor - INFO - Encontrados 10 archivos para procesar
+2025-04-25 15:55:35,828 - src.etl.processing.data_processor - INFO - Cargados 1280 registros para AMS.MC desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\AMS_MC_historical.csv
+2025-04-25 15:55:35,829 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para AMS.MC, creando columna vacía
+2025-04-25 15:55:35,831 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para AMS.MC, creando columna vacía
+2025-04-25 15:55:35,832 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para AMS.MC, creando columna vacía
+2025-04-25 15:55:35,832 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para AMS.MC, creando columna vacía
+2025-04-25 15:55:35,833 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para AMS.MC, creando columna vacía
+2025-04-25 15:55:35,833 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para AMS.MC, creando columna vacía
+2025-04-25 15:55:35,838 - src.etl.processing.data_processor - INFO - Datos procesados para AMS.MC: 1280 registros
+2025-04-25 15:55:35,856 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\AMS_MC_processed.csv
+2025-04-25 15:55:35,861 - src.etl.processing.data_processor - INFO - Cargados 1279 registros para  desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\BBVA_MC_historical.csv
+2025-04-25 15:55:35,862 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para , creando columna vacía
+2025-04-25 15:55:35,863 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para , creando columna vacía
+2025-04-25 15:55:35,863 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para , creando columna vacía
+2025-04-25 15:55:35,864 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para , creando columna vacía
+2025-04-25 15:55:35,865 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para , creando columna vacía
+2025-04-25 15:55:35,866 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para , creando columna vacía
+2025-04-25 15:55:35,871 - src.etl.processing.data_processor - INFO - Datos procesados para : 1279 registros
+2025-04-25 15:55:35,899 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\_processed.csv
+2025-04-25 15:55:35,908 - src.etl.processing.data_processor - INFO - Cargados 1280 registros para CABK.MC desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\CABK_MC_historical.csv
+2025-04-25 15:55:35,908 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para CABK.MC, creando columna vacía
+2025-04-25 15:55:35,909 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para CABK.MC, creando columna vacía
+2025-04-25 15:55:35,910 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para CABK.MC, creando columna vacía
+2025-04-25 15:55:35,911 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para CABK.MC, creando columna vacía
+2025-04-25 15:55:35,911 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para CABK.MC, creando columna vacía
+2025-04-25 15:55:35,913 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para CABK.MC, creando columna vacía
+2025-04-25 15:55:35,922 - src.etl.processing.data_processor - INFO - Datos procesados para CABK.MC: 1280 registros
+2025-04-25 15:55:35,945 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\CABK_MC_processed.csv
+2025-04-25 15:55:35,951 - src.etl.processing.data_processor - INFO - Cargados 1280 registros para FER.MC desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\FER_MC_historical.csv
+2025-04-25 15:55:35,951 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para FER.MC, creando columna vacía
+2025-04-25 15:55:35,952 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para FER.MC, creando columna vacía
+2025-04-25 15:55:35,952 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para FER.MC, creando columna vacía
+2025-04-25 15:55:35,953 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para FER.MC, creando columna vacía
+2025-04-25 15:55:35,954 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para FER.MC, creando columna vacía
+2025-04-25 15:55:35,955 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para FER.MC, creando columna vacía
+2025-04-25 15:55:35,958 - src.etl.processing.data_processor - INFO - Datos procesados para FER.MC: 1280 registros
+2025-04-25 15:55:35,986 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\FER_MC_processed.csv
+2025-04-25 15:55:35,990 - src.etl.processing.data_processor - INFO - Cargados 1279 registros para  desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\IBE_MC_historical.csv
+2025-04-25 15:55:35,992 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para , creando columna vacía
+2025-04-25 15:55:35,993 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para , creando columna vacía
+2025-04-25 15:55:35,993 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para , creando columna vacía
+2025-04-25 15:55:35,994 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para , creando columna vacía
+2025-04-25 15:55:35,995 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para , creando columna vacía
+2025-04-25 15:55:35,995 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para , creando columna vacía
+2025-04-25 15:55:35,998 - src.etl.processing.data_processor - INFO - Datos procesados para : 1279 registros
+2025-04-25 15:55:36,017 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\_processed.csv
+2025-04-25 15:55:36,024 - src.etl.processing.data_processor - INFO - Cargados 1279 registros para  desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\ITX_MC_historical.csv
+2025-04-25 15:55:36,025 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para , creando columna vacía
+2025-04-25 15:55:36,026 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para , creando columna vacía
+2025-04-25 15:55:36,026 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para , creando columna vacía
+2025-04-25 15:55:36,027 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para , creando columna vacía
+2025-04-25 15:55:36,027 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para , creando columna vacía
+2025-04-25 15:55:36,028 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para , creando columna vacía
+2025-04-25 15:55:36,032 - src.etl.processing.data_processor - INFO - Datos procesados para : 1279 registros
+2025-04-25 15:55:36,047 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\_processed.csv
+2025-04-25 15:55:36,058 - src.etl.processing.data_processor - INFO - Cargados 1280 registros para NTGY.MC desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\NTGY_MC_historical.csv
+2025-04-25 15:55:36,059 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para NTGY.MC, creando columna vacía
+2025-04-25 15:55:36,061 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para NTGY.MC, creando columna vacía
+2025-04-25 15:55:36,062 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para NTGY.MC, creando columna vacía
+2025-04-25 15:55:36,063 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para NTGY.MC, creando columna vacía
+2025-04-25 15:55:36,064 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para NTGY.MC, creando columna vacía
+2025-04-25 15:55:36,064 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para NTGY.MC, creando columna vacía
+2025-04-25 15:55:36,072 - src.etl.processing.data_processor - INFO - Datos procesados para NTGY.MC: 1280 registros
+2025-04-25 15:55:36,090 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\NTGY_MC_processed.csv
+2025-04-25 15:55:36,096 - src.etl.processing.data_processor - INFO - Cargados 1280 registros para REP.MC desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\REP_MC_historical.csv
+2025-04-25 15:55:36,097 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para REP.MC, creando columna vacía
+2025-04-25 15:55:36,098 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para REP.MC, creando columna vacía
+2025-04-25 15:55:36,099 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para REP.MC, creando columna vacía
+2025-04-25 15:55:36,102 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para REP.MC, creando columna vacía
+2025-04-25 15:55:36,103 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para REP.MC, creando columna vacía
+2025-04-25 15:55:36,104 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para REP.MC, creando columna vacía
+2025-04-25 15:55:36,108 - src.etl.processing.data_processor - INFO - Datos procesados para REP.MC: 1280 registros
+2025-04-25 15:55:36,128 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\REP_MC_processed.csv
+2025-04-25 15:55:36,133 - src.etl.processing.data_processor - INFO - Cargados 1279 registros para  desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\SAN_MC_historical.csv
+2025-04-25 15:55:36,133 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para , creando columna vacía
+2025-04-25 15:55:36,134 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para , creando columna vacía
+2025-04-25 15:55:36,135 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para , creando columna vacía
+2025-04-25 15:55:36,135 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para , creando columna vacía
+2025-04-25 15:55:36,136 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para , creando columna vacía
+2025-04-25 15:55:36,136 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para , creando columna vacía
+2025-04-25 15:55:36,139 - src.etl.processing.data_processor - INFO - Datos procesados para : 1279 registros
+2025-04-25 15:55:36,164 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\_processed.csv
+2025-04-25 15:55:36,170 - src.etl.processing.data_processor - INFO - Cargados 1279 registros para  desde C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\raw\TEF_MC_historical.csv
+2025-04-25 15:55:36,170 - src.etl.processing.data_processor - WARNING - Columna Price no encontrada para , creando columna vacía
+2025-04-25 15:55:36,171 - src.etl.processing.data_processor - WARNING - Columna Close no encontrada para , creando columna vacía
+2025-04-25 15:55:36,172 - src.etl.processing.data_processor - WARNING - Columna High no encontrada para , creando columna vacía
+2025-04-25 15:55:36,174 - src.etl.processing.data_processor - WARNING - Columna Low no encontrada para , creando columna vacía
+2025-04-25 15:55:36,174 - src.etl.processing.data_processor - WARNING - Columna Open no encontrada para , creando columna vacía
+2025-04-25 15:55:36,175 - src.etl.processing.data_processor - WARNING - Columna Volume no encontrada para , creando columna vacía
+2025-04-25 15:55:36,181 - src.etl.processing.data_processor - INFO - Datos procesados para : 1279 registros
+2025-04-25 15:55:36,197 - src.etl.processing.data_processor - INFO - Datos procesados guardados en C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\processed\_processed.csv
+2025-04-25 15:55:36,197 - src.etl.processing.data_processor - INFO - Procesamiento completado: 10/10 archivos procesados correctamente
+2025-04-25 15:55:36,198 - __main__ - INFO - Procesamiento completado: 10/10 archivos procesados
+2025-04-25 15:55:36,198 - __main__ - INFO - Iniciando fase de CARGA EN BASE DE DATOS
+2025-04-25 15:55:36,199 - src.etl.loading.db_loader - INFO - Inicializado cargador de base de datos: C:\Users\ronal\Documentos\proyectos_github\etl_precio_acciones_airflow\data\database\stocks.db
+2025-04-25 15:55:36,200 - src.etl.loading.db_loader - INFO - Encontrados 11 archivos procesados para cargar
+2025-04-25 15:55:36,201 - src.etl.loading.db_loader - INFO - Base de datos inicializada correctamente
+2025-04-25 15:55:36,265 - src.etl.loading.db_loader - ERROR - Error al cargar datos para AMS en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,277 - src.etl.loading.db_loader - ERROR - Error al cargar datos para BBVA en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,311 - src.etl.loading.db_loader - ERROR - Error al cargar datos para CABK en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,336 - src.etl.loading.db_loader - ERROR - Error al cargar datos para FER en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,352 - src.etl.loading.db_loader - ERROR - Error al cargar datos para IBE en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,368 - src.etl.loading.db_loader - ERROR - Error al cargar datos para ITX en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,408 - src.etl.loading.db_loader - ERROR - Error al cargar datos para NTGY en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,435 - src.etl.loading.db_loader - ERROR - Error al cargar datos para REP en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,451 - src.etl.loading.db_loader - ERROR - Error al cargar datos para SAN en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,467 - src.etl.loading.db_loader - ERROR - Error al cargar datos para TEF en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,498 - src.etl.loading.db_loader - ERROR - Error al cargar datos para  en la base de datos: NOT NULL constraint failed: stocks.ticker
+2025-04-25 15:55:36,498 - src.etl.loading.db_loader - INFO - Carga en base de datos completada: 0/11 archivos cargados correctamente
+2025-04-25 15:55:36,498 - __main__ - INFO - Carga en base de datos completada: 0/11 archivos cargados
+2025-04-25 15:55:36,499 - __main__ - INFO - ETL completo finalizado con éxito
